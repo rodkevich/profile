@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+
+  postgres:
+    image: postgres:latest
+    container_name: db
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: 3000M
+    env_file:
+      - ./repository/postgres/database.env
+    ports:
+      - 5432:5432/tcp
