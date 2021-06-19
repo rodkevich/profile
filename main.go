@@ -63,33 +63,38 @@ func main() {
 	persons = append(persons, Peter)
 	persons = append(persons, John)
 
+	//create users
 	for _, person := range persons {
 		id, _ := rep.Create(person)
 		log.Println(id)
 	}
+
+	// search for users
 	users, err := rep.Find()
 	if err != nil {
 		log.Println(err)
 	}
 	log.Println(users)
 
+	// update a user by id
 	var JohnUpdated = &repository.PersonModel{
 		ID:          users[0].ID,
-		ProjectID:   "S0me_pr0j3ct_1d",
-		ProjectEnv:  "S0me_pr0j3ct_3nv",
-		CompanyID:   "S0me_c0mp4ny_1d",
-		TeamID:      "S0me_t34m_1d",
-		GroupID:     "S0me_gr0up_1d",
+		ProjectID:   "updated_pr0j3ct_1d",
+		ProjectEnv:  "updated_pr0j3ct_3nv",
+		CompanyID:   "updated_c0mp4ny_1d",
+		TeamID:      "updated_t34m_1d",
+		GroupID:     "updated_gr0up_1d",
 		FirstName:   "UpdatedJohn",
 		LastName:    "UpdatedDooooo",
 		Email:       "UpdatedJohn@Dooooo.Bar",
 		Phone:       "Updated9887654210",
 		Password:    "UpdatedPass_01-1",
-		Description: "V3ry_n1c3_u53r",
+		Description: "updated_n1c3_u53r",
 	}
 
 	_ = rep.Update(JohnUpdated)
 
+	// find user by id
 	var J *repository.PersonModel
 
 	J, err = rep.FindByID(users[0].ID)
@@ -98,21 +103,23 @@ func main() {
 	}
 
 	log.Println(J)
-	//
-	//for i := 1; i <= 10; i++ {
-	//	_, _ = rep.Create(John)
-	//}
 
-	////delete user by id
-	//var u = users[1].ID
-	//err = rep.Delete(u)
+	// create with loop
+	for i := 1; i <= 10; i++ {
+		_, _ = rep.Create(John)
+	}
 
-	//// truncate the whole table
-	//trResp := rep.Truncate()
-	//fmt.Println("trResp", trResp)
+	// delete user by id
+	var u = users[1].ID
+	err = rep.Delete(u)
+	fmt.Println(err)
 
-	////delete the whole table
-	//_ = rep.Drop()
+	// truncate the whole table
+	trResp := rep.Truncate()
+	fmt.Println("trResp", trResp)
+
+	//delete the whole table
+	_ = rep.Drop()
 
 	fmt.Println("Done")
 }

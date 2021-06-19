@@ -115,7 +115,7 @@ func (r *repository) Create(person *repo.PersonModel) (string, error) {
 	if err != nil {
 		return personId, err
 	}
-	fmt.Printf("Successfully created user with id %v\n", personId)
+	fmt.Printf("SCAN - Successfully created user with id %v\n", personId)
 	return personId, nil
 }
 
